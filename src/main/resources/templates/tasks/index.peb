@@ -18,15 +18,32 @@
 
     {# Error Summary - Week 8 Lab 2 #}
     {% if error %}
-    <div role="alert" aria-live="assertive" class="error-summary" id="error-summary" tabindex="-1">
+    <div role="alert"
+         aria-live="assertive"
+         class="error-summary"
+         id="error-summary"
+         tabindex="-1">
         <h2>There is a problem</h2>
         <ul>
             {% if error == "title" %}
-            <li><a href="#task-title">{% if msg == "too_long" %}Title is too long (max 200 characters){% else %}Title is required. Please enter at least one character.{% endif %}</a></li>
+            <li>
+                <a href="#task-title">
+                    {% if msg == "too_long" %}
+                        Title is too long (max 200 characters)
+                    {% else %}
+                        Title is required. Please enter at least one character.
+                    {% endif %}
+                </a>
+            </li>
             {% endif %}
         </ul>
     </div>
     {% endif %}
+
+    {# Status message area (for success / info messages) #}
+    <section aria-label="Task status">
+        <div id="status" role="status" aria-live="polite"></div>
+    </section>
 
     {# Add Task Form - Week 7 #}
     <section aria-labelledby="add-heading">
@@ -43,13 +60,23 @@
                    id="task-title"
                    name="title"
                    required
-                   {% if error == "title" %}aria-invalid="true" aria-describedby="title-hint title-error"{% else %}aria-describedby="title-hint"{% endif %}
+                   {% if error == "title" %}
+                       aria-invalid="true"
+                       aria-describedby="title-hint title-error"
+                   {% else %}
+                       aria-describedby="title-hint"
+                   {% endif %}
                    placeholder="e.g., Buy milk">
 
             <small id="title-hint">Keep it short and specific.</small>
+
             {% if error == "title" %}
             <p id="title-error" class="error-message">
-                {% if msg == "too_long" %}Title is too long (max 200 characters){% else %}Title is required. Please enter at least one character.{% endif %}
+                {% if msg == "too_long" %}
+                    Title is too long (max 200 characters)
+                {% else %}
+                    Title is required. Please enter at least one character.
+                {% endif %}
             </p>
             {% endif %}
 
@@ -76,7 +103,10 @@
                    aria-describedby="search-hint"
                    value="{{ query | default('') }}">
 
-            <small id="search-hint">Filters tasks as you type; works without JavaScript.</small>
+            <small id="search-hint">
+                Filters tasks as you type; works without JavaScript.
+            </small>
+
             <button type="submit">Apply Filter</button>
         </form>
     </section>
